@@ -11,11 +11,11 @@
 
 - name: Check if logstash-forwarder is already installed.
   stat: path=/etc/init.d/logstash-forwarder
-  register: logstash_forwarder_installed
+  register: logstash_forwarder.installed
 
 - name: Update apt cache if repository just added.
   apt: update_cache=yes
-  when: logstash_forwarder_installed.stat.exists == false
+  when: logstash_forwarder.installed.stat.exists == false
 
 - name: Install logstash-forwarder.
   apt: pkg=logstash-forwarder state=present
