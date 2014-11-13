@@ -1,4 +1,6 @@
 ---
+- include: backwards_compatibility.yml
+
 - include: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
 

@@ -1,0 +1,45 @@
+---
+- name: Use existing if defined - logstash_forwarder_logstash_server
+  set_fact:
+    logstash_forwarder:
+      servers:
+        - host: "{{ logstash_forwarder_logstash_server }}"
+  when: logstash_forwarder_logstash_server is defined AND logstash_forwarder_logstash_server_port is not defined
+
+- name: Use existing if defined - logstash_forwarder_logstash_server_port
+  set_fact:
+    logstash_forwarder:
+      servers:
+        - host: "{{ logstash_forwarder_logstash_server }}"
+          port: "{{ logstash_forwarder_logstash_server_port }}"
+  when: logstash_forwarder_logstash_server_port is defined AND logstash_forwarder_logstash_server_port is defined
+
+- name: Use existing if defined - logstash_ssl_dir
+  set_fact:
+    logstash_forwarder:
+      ssl:
+        dir: "{{ logstash_ssl_dir }}"
+  when: logstash_ssl_dir is defined
+
+- name: Use existing if defined - logstash_forwarder_ssl_certificate_file
+  set_fact:
+    logstash_forwarder:
+      ssl:
+        crt: "{{ logstash_forwarder_ssl_certificate_file }}"
+  when: logstash_forwarder_ssl_certificate_file is defined
+
+- name: Use existing if defined - logstash_forwarder_files
+  set_fact:
+    logstash_forwarder:
+      files: "{{ logstash_forwarder_files }}"
+  when: logstash_forwarder_files is defined
+
+### Backwards compatibility
+# logstash_forwarder:
+#   servers:
+#     - host: "{{ logstash_forwarder_logstash_server }}"
+#       port: "{{ logstash_forwarder_logstash_server_port }}"
+#   ssl:
+#     dir: "{{ logstash_ssl_dir }}"
+#     crt: "{{ logstash_forwarder_ssl_certificate_file }}"
+#   files: "{{ logstash_forwarder_files }}"

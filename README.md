@@ -26,7 +26,7 @@ The central Logstash server/port to which logstash-forwarder should connect.
 
 The location and filename of the SSL certificate logstash-forwarder will use to authenticate to the logstash server.
 
-    logstash_forwarder_files:
+    logstash_forwarder.files:
       - paths:
           - /var/log/messages
           - /var/log/auth.log

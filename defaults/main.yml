@@ -13,8 +13,8 @@ logstash_forwarder:
         - /var/log/auth.log
       fields:
         type: syslog
-    # To add more sets of files...
-    # - paths:
-    #     - /var/log/boot.log
-    #   fields:
-    #     type: syslog
+  # To add more sets of files...
+  # - paths:
+  #     - /var/log/boot.log
+  #   fields:
+  #     type: syslog
