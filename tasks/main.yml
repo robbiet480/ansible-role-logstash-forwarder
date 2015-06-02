@@ -13,10 +13,23 @@
 #     force: yes
 #     mode: 0655
 
+- name: Create logstash-forwarder configuration directory
+  file:
+    path: /etc/logstash-forwarder.d
+    state: directory
+    mode: 0755
+
+- name: Create logstash-forwarder network configuration file.
+  template:
+    src: network.j2
+    dest: /etc/logstash-forwarder.d/network.conf
+    mode: 0644
+  notify: restart logstash-forwarder
+
 - name: Create logstash-forwarder configuration file.
   template:
     src: logstash-forwarder.j2
-    dest: /etc/logstash-forwarder
+    dest: "/etc/logstash-forwarder.d/{{ logstash_forwarder_conf_file }}"
     mode: 0644
   notify: restart logstash-forwarder
 
