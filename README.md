@@ -14,26 +14,29 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
+The central Logstash server/port to which logstash-forwarder should connect.
+
     logstash_forwarder:
       servers:
         - host: localhost
           port: 5000
 
-The central Logstash server/port to which logstash-forwarder should connect.
-
-    logstash_ssl_dir: /etc/pki/logstash
-    logstash_forwarder_ssl_certificate_file: logstash-forwarder-example.crt
-
 The location and filename of the SSL certificate logstash-forwarder will use to authenticate to the logstash server.
 
-    logstash_forwarder.files:
-      - paths:
-          - /var/log/messages
-          - /var/log/auth.log
-        fields:
-          type: syslog
+    logstash_forwarder:
+      ssl:
+        dir: /etc/pki/logstash
+        crt: logstash-forwarder-example.crt
 
 Configuration of files monitored by logstash-forwarder. You can add more sets of files by adding to the list with another set of files; see `defaults/main.yml` for an example.
+
+    logstash_forwarder:
+      files:
+        - paths:
+            - /var/log/messages
+            - /var/log/auth.log
+          fields:
+            type: syslog
 
 ## Dependencies
 
@@ -44,6 +47,9 @@ None.
     - hosts: all
       roles:
         - { role: geerlingguy.logstash-forwarder }
+
+## Logstash-Forward configuration
+You can install additional Logstash Forwarder configs in `/etc/logstash-forwarder.d/`
 
 ## License
 
