@@ -4,7 +4,7 @@
     logstash_forwarder:
       servers:
         - host: "{{ logstash_forwarder_logstash_server }}"
-  when: logstash_forwarder_logstash_server is defined AND logstash_forwarder_logstash_server_port is not defined
+  when: logstash_forwarder_logstash_server is defined and logstash_forwarder_logstash_server_port is not defined
 
 - name: Use existing if defined - logstash_forwarder_logstash_server_port
   set_fact:
@@ -12,7 +12,7 @@
       servers:
         - host: "{{ logstash_forwarder_logstash_server }}"
           port: "{{ logstash_forwarder_logstash_server_port }}"
-  when: logstash_forwarder_logstash_server_port is defined AND logstash_forwarder_logstash_server_port is defined
+  when: logstash_forwarder_logstash_server_port is defined and logstash_forwarder_logstash_server_port is defined
 
 - name: Use existing if defined - logstash_ssl_dir
   set_fact:
