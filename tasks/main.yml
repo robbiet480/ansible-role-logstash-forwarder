@@ -21,19 +21,15 @@
     state: directory
     mode: 0755
 
-- name: Create logstash-forwarder network configuration file
+- name: Create logstash-forwarder configuration files
   template:
-    src: network.j2
-    dest: /etc/logstash-forwarder.d/network.conf
+    src: {{ item }}.j2
+    dest: /etc/logstash-forwarder.d/{{ item }}.conf
     mode: 0644
   notify: restart logstash-forwarder
-
-- name: Create logstash-forwarder files configuration file
-  template:
-    src: files.j2
-    dest: "/etc/logstash-forwarder.d/files.conf"
-    mode: 0644
-  notify: restart logstash-forwarder
+  with_items:
+    - files
+    - network
 
 - name: Ensure Logstash SSL key pair directory exists
   file:
