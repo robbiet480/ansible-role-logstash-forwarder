@@ -23,8 +23,8 @@
 
 - name: Create logstash-forwarder configuration files
   template:
-    src: {{ item }}.j2
-    dest: /etc/logstash-forwarder.d/{{ item }}.conf
+    src: "{{ item }}.j2"
+    dest: "/etc/logstash-forwarder.d/{{ item }}.conf"
     mode: 0644
   notify: restart logstash-forwarder
   with_items:
