@@ -37,13 +37,13 @@
 
 - name: Ensure Logstash SSL key pair directory exists
   file:
-    path: "{{ logstash_forwarder.ssl.dir }}"
+    path: "{{ logstash_forwarder.ssl.destination_dir }}"
     state: directory
 
 - name: Copy SSL key and cert for logstash-forwarder
   copy:
-    src: "{{ logstash_forwarder.ssl.crt }}"
-    dest: "{{ logstash_forwarder.ssl.dir }}/{{ logstash_forwarder.ssl.crt }}"
+    src: "{{ logstash_forwarder.ssl.source_dir }}/{{ logstash_forwarder.ssl.crt }}"
+    dest: "{{ logstash_forwarder.ssl.destination_dir }}/{{ logstash_forwarder.ssl.crt }}"
     mode: 0644
   notify: restart logstash-forwarder
 

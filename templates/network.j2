@@ -6,6 +6,6 @@
       {% endfor %}
     ],
     "timeout": {{ logstash_forwarder.timeout }},
-    "ssl ca": "{{ logstash_forwarder.ssl.dir }}/{{ logstash_forwarder.ssl.crt }}"
+    "ssl ca": "{{ logstash_forwarder.ssl.destination_dir }}/{{ logstash_forwarder.ssl.crt }}"
   },
 }

@@ -5,7 +5,8 @@ logstash_forwarder:
     - host: localhost
       port: 5000
   ssl:
-    dir: /etc/pki/logstash
+    source_dir: .
+    destination_dir: /etc/pki/logstash
     crt: logstash-forwarder-example.crt
   files:
     - paths:
