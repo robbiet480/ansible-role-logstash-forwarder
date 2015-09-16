@@ -8,7 +8,7 @@
   when: ansible_os_family == 'Debian'
 
 # See: http://goo.gl/cz9Lnd
-# - name: Install logstash-forwarder init script.
+# - name: Install logstash-forwarder init script
 #   get_url:
 #     url: https://raw.github.com/elasticsearch/logstash-forwarder/master/logstash-forwarder.init
 #     dest: /etc/init.d/logstash-forwarder
@@ -21,31 +21,31 @@
     state: directory
     mode: 0755
 
-- name: Create logstash-forwarder network configuration file.
+- name: Create logstash-forwarder network configuration file
   template:
     src: network.j2
     dest: /etc/logstash-forwarder.d/network.conf
     mode: 0644
   notify: restart logstash-forwarder
 
-- name: Create logstash-forwarder files configuration file.
+- name: Create logstash-forwarder files configuration file
   template:
     src: files.j2
     dest: "/etc/logstash-forwarder.d/files.conf"
     mode: 0644
   notify: restart logstash-forwarder
 
-- name: Ensure Logstash SSL key pair directory exists.
+- name: Ensure Logstash SSL key pair directory exists
   file:
     path: "{{ logstash_forwarder.ssl.dir }}"
     state: directory
 
-- name: Copy SSL key and cert for logstash-forwarder.
+- name: Copy SSL key and cert for logstash-forwarder
   copy:
     src: "{{ logstash_forwarder.ssl.crt }}"
     dest: "{{ logstash_forwarder.ssl.dir }}/{{ logstash_forwarder.ssl.crt }}"
     mode: 0644
   notify: restart logstash-forwarder
 
-- name: Ensure logstash-forwarder is started and enabled on boot.
+- name: Ensure logstash-forwarder is started and enabled on boot
   service: name=logstash-forwarder state=started enabled=yes
