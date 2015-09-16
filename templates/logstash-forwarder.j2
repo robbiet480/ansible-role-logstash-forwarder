@@ -1,14 +1,14 @@
 {
   "network": {
     "servers": [{% for server in logstash_forwarder.servers %}"{{ server.host }}:{{ server.port }}"{% if not loop.last %},{% endif %}{% endfor %}],
-    {% if logstash_forwarder.ssl.client_crt is defined and logstash_forwarder.ssl.client_crt %}
+{% if logstash_forwarder.ssl.client_crt is defined and logstash_forwarder.ssl.client_crt %}
     "ssl certificate": "{{ logstash_forwarder.ssl.destination_dir }}/{{ logstash_forwarder.ssl.client_crt }}",
-    {% endif %}
-    {% if logstash_forwarder.ssl.client_key is defined and logstash_forwarder.ssl.client_key %}
+{% endif %}
+{% if logstash_forwarder.ssl.client_key is defined and logstash_forwarder.ssl.client_key %}
     "ssl key": "{{ logstash_forwarder.ssl.destination_dir }}/{{ logstash_forwarder.ssl.client_key }}",
-    {% endif %}
+{% endif %}
     "ssl ca": "{{ logstash_forwarder.ssl.destination_dir }}/{{ logstash_forwarder.ssl.ca_crt }}",
     "timeout": {{ logstash_forwarder.timeout }}
   },
-  "files": {{ logstash_forwarder.files | to_json }}
+  "files": {{ logstash_forwarder.files | to_nice_json }}
 }
