@@ -18,3 +18,5 @@ logstash_forwarder:
   #     - /var/log/boot.log
   #   fields:
   #     type: syslog
+
+logstash_forwarder_conf_file: default.conf
