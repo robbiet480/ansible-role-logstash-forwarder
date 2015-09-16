@@ -14,19 +14,29 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-The central Logstash server/port to which logstash-forwarder should connect.
+The central Logstash server/port to which logstash-forwarder should connect:
 
     logstash_forwarder:
       servers:
         - host: localhost
           port: 5000
 
-The location and filename of the SSL certificate logstash-forwarder will use to authenticate to the logstash server.
+The location and filename of the SSL CA certificate logstash-forwarder will use to authenticate to the logstash server:
 
     logstash_forwarder:
       ssl:
         dir: /etc/pki/logstash
-        crt: logstash-forwarder-example.crt
+        ca_crt: logstash-forwarder-example.ca.crt
+
+You can also provide the client key and certificate:
+
+    logstash_forwarder:
+      ssl:
+        dir: /etc/pki/logstash
+        ca_crt: logstash-forwarder-example.ca.crt
+        client_key: logstash-forwarder-example.key
+        client_crt: logstash-forwarder-example.crt
+
 
 Configuration of files monitored by logstash-forwarder. You can add more sets of files by adding to the list with another set of files; see `defaults/main.yml` for an example.
 

@@ -1,7 +1,0 @@
-{
-  "network": {
-    "servers": [{% for server in logstash_forwarder.servers %}"{{ server.host }}:{{ server.port }}"{% if not loop.last %},{% endif %}{% endfor %}],
-    "timeout": {{ logstash_forwarder.timeout }},
-    "ssl ca": "{{ logstash_forwarder.ssl.destination_dir }}/{{ logstash_forwarder.ssl.crt }}"
-  }
-}

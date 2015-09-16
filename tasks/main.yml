@@ -21,27 +21,40 @@
     state: directory
     mode: 0755
 
-- name: Create logstash-forwarder configuration files
+- name: Create logstash-forwarder configuration file
   template:
-    src: "{{ item }}.j2"
-    dest: "/etc/logstash-forwarder.d/{{ item }}.conf"
+    src: "logstash-forwarder.j2"
+    dest: "/etc/logstash-forwarder.d/logstash-forwarder.conf"
     mode: 0644
   notify: restart logstash-forwarder
-  with_items:
-    - files
-    - network
 
-- name: Ensure Logstash SSL key pair directory exists
+- name: Ensure Logstash SSL destination directory exists
   file:
     path: "{{ logstash_forwarder.ssl.destination_dir }}"
     state: directory
 
-- name: Copy SSL key and cert for logstash-forwarder
+- name: Copy SSL CA certificate for logstash-forwarder
   copy:
-    src: "{{ logstash_forwarder.ssl.source_dir }}/{{ logstash_forwarder.ssl.crt }}"
-    dest: "{{ logstash_forwarder.ssl.destination_dir }}/{{ logstash_forwarder.ssl.crt }}"
+    src: "{{ logstash_forwarder.ssl.source_dir }}/{{ logstash_forwarder.ssl.ca_crt }}"
+    dest: "{{ logstash_forwarder.ssl.destination_dir }}/{{ logstash_forwarder.ssl.ca_crt }}"
     mode: 0644
   notify: restart logstash-forwarder
+
+- name: Copy SSL client key for logstash-forwarder
+  copy:
+    src: "{{ logstash_forwarder.ssl.source_dir }}/{{ logstash_forwarder.ssl.client_key }}"
+    dest: "{{ logstash_forwarder.ssl.destination_dir }}/{{ logstash_forwarder.ssl.client_key }}"
+    mode: 0644
+  notify: restart logstash-forwarder
+  when: logstash_forwarder.ssl.client_key is defined
+
+- name: Copy SSL client certificate for logstash-forwarder
+  copy:
+    src: "{{ logstash_forwarder.ssl.source_dir }}/{{ logstash_forwarder.ssl.client_crt }}"
+    dest: "{{ logstash_forwarder.ssl.destination_dir }}/{{ logstash_forwarder.ssl.client_crt }}"
+    mode: 0644
+  notify: restart logstash-forwarder
+  when: logstash_forwarder.ssl.client_crt is defined
 
 - name: Ensure logstash-forwarder is started and enabled on boot
   service: name=logstash-forwarder state=started enabled=yes

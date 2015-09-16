@@ -7,7 +7,7 @@ logstash_forwarder:
   ssl:
     source_dir: .
     destination_dir: /etc/pki/logstash
-    crt: logstash-forwarder-example.crt
+    ca_crt: logstash-forwarder-example.ca.crt
   files:
     - paths:
         - /var/log/messages
