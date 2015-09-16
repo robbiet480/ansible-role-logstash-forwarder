@@ -14,8 +14,10 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    logstash_forwarder_logstash_server: localhost
-    logstash_forwarder_logstash_server_port: 5000
+    logstash_forwarder:
+      servers:
+        - host: localhost
+          port: 5000
 
 The central Logstash server/port to which logstash-forwarder should connect.
 
@@ -24,7 +26,7 @@ The central Logstash server/port to which logstash-forwarder should connect.
 
 The location and filename of the SSL certificate logstash-forwarder will use to authenticate to the logstash server.
 
-    logstash_forwarder_files:
+    logstash_forwarder.files:
       - paths:
           - /var/log/messages
           - /var/log/auth.log
