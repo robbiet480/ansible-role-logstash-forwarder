@@ -18,14 +18,14 @@
   set_fact:
     logstash_forwarder:
       ssl:
-        dir: "{{ logstash_ssl_dir }}"
+        destination_dir: "{{ logstash_ssl_dir }}"
   when: logstash_ssl_dir is defined
 
 - name: Use existing if defined - logstash_forwarder_ssl_certificate_file
   set_fact:
     logstash_forwarder:
       ssl:
-        crt: "{{ logstash_forwarder_ssl_certificate_file }}"
+        ca_crt: "{{ logstash_forwarder_ssl_certificate_file }}"
   when: logstash_forwarder_ssl_certificate_file is defined
 
 - name: Use existing if defined - logstash_forwarder_files
