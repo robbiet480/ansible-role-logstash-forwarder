@@ -28,10 +28,10 @@
     mode: 0644
   notify: restart logstash-forwarder
 
-- name: Create logstash-forwarder configuration file.
+- name: Create logstash-forwarder files configuration file.
   template:
-    src: logstash-forwarder.j2
-    dest: "/etc/logstash-forwarder.d/{{ logstash_forwarder_conf_file }}"
+    src: files.j2
+    dest: "/etc/logstash-forwarder.d/files.conf"
     mode: 0644
   notify: restart logstash-forwarder
 
